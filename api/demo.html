@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>WebPush API</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+  <link rel="stylesheet" href="styles/index.css">
+</head>
+
+<body>
+
+  <header>
+    <h1>WebPush API</h1>
+    <p style="text-align: center">Messages in the console</p>
+  </header>
+
+  <main>
+    <button onclick="trigger_post()">POST (send notification)</button>
+    <button onclick="trigger_get()">GET (not supported)</button>
+    <button onclick="trigger_put()">PUT (not supported)</button>
+    <button onclick="trigger_delete()">DELETE (not supported)</button>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+  <script>
+  function trigger_post(){
+    var js_obj = {
+      subscriber: {
+        endpoint: 'https://fcm.googleapis.com/fcm/send/f62gDWNV8No:APA91bHZ5A0tK9HgSEf7Yj_oGNa85lIKeedzucTkZ4dXY4_1GDQMnG1lEnK46aQviptKWjEZnlnPiyrjnatgsvCM3P3ZbXwzcEfVxewqQrLlBH8T1ZbHIcURinQHuyzGQqYe_uCDNM5c',
+        authToken: "x2-Wy6YXaGlU5ABWd9YIzA",
+        publicKey: "BJq90fq61XXV0tle4eL64g07xtmBscYN6fFHQbOk04anGNlwaQDVRTy7HgHuX_jnCEN7BRrkb-LjYqPffQ5Atvs",
+      },
+      notification: {
+        title: "Titre de la notification",
+        body: "Bonjour monsieur lutin. Bonsoir"
+      }
+    };
+
+    $.ajax({
+      type: "POST",
+      url: 'api.php',
+      data: JSON.stringify( js_obj ),
+      success: function(data){
+       console.log(data);
+      }
+    });
+  }
+
+  function trigger_put(){
+    $.ajax({
+      type: "PUT",
+      url: 'api.php',
+      data: JSON.stringify( {} ),
+      success: function(data){
+       console.log(data);
+      }
+    });
+  }
+
+  function trigger_delete(){
+    $.ajax({
+      type: "DELETE",
+      url: 'api.php',
+      data: JSON.stringify( {} ),
+      success: function(data){
+       console.log(data);
+      }
+    });
+  }
+
+  function trigger_get(){
+    $.ajax({
+      type: "GET",
+      url: 'api.php/test',
+      data: JSON.stringify( {} ),
+      success: function(data){
+       console.log(data);
+      }
+    });
+  }
+  </script>
+
+  <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+
+</body>
+</html>
